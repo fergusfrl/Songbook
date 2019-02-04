@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import SwipeableViews from 'react-swipeable-views';
 
 // Actions
 import { getSingleSong, setChordView, removeCurrentSong } from '../../actions/actions';
@@ -101,6 +102,7 @@ const SongView = (props: ISongViewProps) => {
     }
 
     const handleTab = (e: any, tab: number) => setTab(tab);
+    const handleSwipe = (tab: number) => setTab(tab);
     const handleMenuOpen = (e: any) => setAnchorEl(e.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
     const handleModalOpen = () => setModal(true);
@@ -153,9 +155,14 @@ const SongView = (props: ISongViewProps) => {
                 </Tabs>
                 <Divider />
                 <CardContent className={classes.content}>
-                    <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                        { tab === 0 ? lyrics : chords }
-                    </Typography>
+                    <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
+                        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+                            { lyrics }
+                        </Typography>
+                        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+                            { chords }
+                        </Typography>
+                    </SwipeableViews>
                     <br />
                     <br />
                     <br />
