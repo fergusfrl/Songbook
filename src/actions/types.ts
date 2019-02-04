@@ -1,0 +1,14 @@
+export const GET_ALL_SONGS: string = "GET_ALL_SONGS";
+export const LOADING_ALL_SONGS: string = "LOADING_ALL_SONGS";
+export const GET_SINGLE_SONG: string = "GET_SINGLE_SONG";
+export const REMOVE_CURRENT_SONG: string = "REMOVE_CURRENT_SONG";
+export const SET_SORT_ORDER: string = "SET_SORT_ORDER";
+export const SET_SEARCH_STRING: string = "SET_SEARCH_STRING";
+export const SET_VIEW: string = "SET_VIEW";
+export const CREATING_SONG: string = "CREATING_SONG";
+export const ADDED_NEW_SONG: string = "ADD_NEW_SONG";
+export const LOADING_SINGLE_SONG: string = "LOADING_SINGLE_SONG";
+export const SET_FONT_SIZE: string = "SET_FONT_SIZE";
+export const SET_CHORD_VIEW: string = "SET_CHORD_VIEW";
+export const DELETE_SONG: string = "DELETE_SONG";
+export const EDIT_SONG: string = "EDIT_SONG";
