@@ -5,18 +5,11 @@ import { withRouter, Route, Switch, RouteComponentProps } from 'react-router-dom
 // Actions
 import { getAllSongs } from '../actions/actions';
 
-// Material UI
-import { withStyles } from '@material-ui/core/styles';
-
 // Components
 import NavBar from './NavBar/NavBar';
 import ListView from './ListView/ListView';
 import SongView from './SongView/SongView';
 import AddView from './AddView/AddView';
-import EditView from './EditView/EditView';
-
-const styles = {
-};
 
 interface IAppViewProps extends RouteComponentProps<any> {
     location: any,

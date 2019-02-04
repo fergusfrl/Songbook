@@ -39,6 +39,8 @@ const styles = {
         margin: '2em auto',
         display: 'block'
     },
+    cardHeader: {
+    },
     chips: {
         display: 'flex',
         justifyContent: 'center',
@@ -112,6 +114,7 @@ const SongView = (props: ISongViewProps) => {
         <div className={classes.container}>
             <Card className={classes.card}>
                 <CardHeader
+                    className={classes.cardHeader}
                     title={<Typography align="center" variant="h5">{title}</Typography>}
                     subheader={<Typography align="center" variant="subtitle2">{renderSubTitle()}</Typography>}
                     avatar={
@@ -150,7 +153,7 @@ const SongView = (props: ISongViewProps) => {
                 </Tabs>
                 <Divider />
                 <CardContent className={classes.content}>
-                    <Typography variant="body1" align="center" style={{ fontSize }}>
+                    <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
                         { tab === 0 ? lyrics : chords }
                     </Typography>
                     <br />
