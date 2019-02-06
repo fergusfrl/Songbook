@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
 // Actions
-import { getSingleSong, setChordView, removeCurrentSong } from '../../actions/actions';
+import { getSingleSong, setChordView } from '../../actions/actions';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -78,12 +78,11 @@ interface ISongViewProps {
     fontSize: number,
     chordView: boolean,
     setChordView: any,
-    removeCurrentSong: any,
     id: string
 }
 
 const SongView = (props: ISongViewProps) => {
-    const { location, getSingleSong, isLoading, currentSong, classes, fontSize, id, removeCurrentSong } = props;
+    const { location, getSingleSong, isLoading, currentSong, classes, fontSize, id } = props;
     const { title, artist, album, tags, lyrics, chords } = currentSong;
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -133,7 +132,7 @@ const SongView = (props: ISongViewProps) => {
                     }
                 />
                 <div className={classes.chips}>
-                    {tags && tags.split(', ').map((tag: string, index: number) => 
+                    {tags && tags.length > 0 && tags.map((tag: string, index: number) => 
                         <Chip
                             key={index}
                             label={tag}
@@ -203,4 +202,4 @@ const mapStateToProps = (state: any) => ({
     chordView: state.lyricViewConfig.visibleChords
 });
   
-export default connect(mapStateToProps, { getSingleSong, setChordView, removeCurrentSong })(withStyles(styles)(SongView));
+export default connect(mapStateToProps, { getSingleSong, setChordView })(withStyles(styles)(SongView));

@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ChipInput from 'material-ui-chip-input';
 
 // Actions
 import { addNewSong, editSong } from '../../actions/actions';
@@ -22,15 +23,20 @@ const styles = {
     },
     link: {
         textDecoration: 'none'
+    },
+    tags: {
+        width: '70vw',
+        maxWidth: '70vw',
+        marginBottom: '1.5em'
     }
 };
 
 interface IAddViewState {
-    [key: number]: string,
+    [key: number]: string | string[],
     title: string,
     artist: string,
     album: string,
-    tags: string,
+    tags: string[],
     lyrics: string,
     chords: string
 }
@@ -53,6 +59,8 @@ const INPUTS = [
 
 const AddView = (props: IAddViewProps) => {
     const { classes, addNewSong, currentSong, editSong } = props;
+
+    const x: Record<"root", string> = {root: 'yo'};
 
     const initialState: IAddViewState = {
         title: currentSong.title,
@@ -78,6 +86,22 @@ const AddView = (props: IAddViewProps) => {
         });
     }
 
+    const handleTagAdd = (chip: string) => {
+        var newTagArray = state.tags ? state.tags : [];
+        newTagArray.push(chip);
+        setState({
+            ...state,
+            tags: newTagArray
+        });
+    };
+    const handleTagRemove = (chip: string, index: number) => {
+        var newTagArray = state.tags.filter(tag => chip !== tag);
+        setState({
+            ...state,
+            tags: newTagArray
+        });
+    };
+
     return (
         <Fragment>
             <br />
@@ -88,27 +112,47 @@ const AddView = (props: IAddViewProps) => {
                 alignItems="center"
             >
                 {
-                    INPUTS.map((input: any) => 
+                    INPUTS.map((input: any) =>
                         <Grid item>
-                            <TextField
-                                value={state[input.id]}
-                                id={input.id}
-                                required={input.required}
-                                label={input.name}
-                                multiline={input.multiline}
-                                variant="filled"
-                                rows={4}
-                                rowsMax={100}
-                                className={classes.input}
-                                helperText={input.helperText}
-                                onChange={handleChange}
-                            />
+                            {
+                                input.id !== 'tags' ?
+                                    <TextField
+                                        value={state[input.id]}
+                                        id={input.id}
+                                        required={input.required}
+                                        label={input.name}
+                                        multiline={input.multiline}
+                                        variant="filled"
+                                        rows={4}
+                                        rowsMax={100}
+                                        className={classes.input}
+                                        helperText={input.helperText}
+                                        onChange={handleChange}
+                                    /> :
+                                    <ChipInput
+                                        value={state.tags ? state.tags : []}
+                                        onAdd={handleTagAdd}
+                                        onDelete={handleTagRemove}
+                                        classes={x}
+                                        className={classes.tags}
+                                        variant="filled"
+                                        label={input.name}
+                                        id={input.id}
+                                        fullWidth={true}
+                                        fullWidthInput={true}
+                                    />
+                            }
                         </Grid>
                     )
                 }
                 <Grid item>
                     <Link to="/" className={classes.link}>
-                        <Button onClick={handleSave} className={classes.button} variant="contained" color="secondary">
+                        <Button
+                            onClick={handleSave}
+                            className={classes.button}
+                            variant="contained"
+                            color="secondary"
+                        >
                             Save
                         </Button>
                     </Link>
@@ -128,4 +172,7 @@ const mapStateToProps = (state: any) => ({
     currentSong: state.currentSongRequest.currentSong
 });
   
-export default connect(mapStateToProps, { addNewSong, editSong })(withStyles(styles)(AddView));
+export default connect(
+    mapStateToProps,
+    { addNewSong, editSong }
+)(withStyles(styles)(AddView));

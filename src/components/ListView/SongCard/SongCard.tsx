@@ -27,7 +27,7 @@ interface Song {
     title: string,
     artist: string,
     album: string,
-    tags: string
+    tags: string[]
 };
 
 interface ISongCardProps {
@@ -58,12 +58,12 @@ const SongCard = (props: ISongCardProps) => {
                             {renderSubTitle()}
                         </Typography>
                         {
-                            tags && (
+                            tags && tags.length > 0 && (
                                 <>
                                     <br />
                                     <Divider />
                                     <br />
-                                    {tags.split(', ').map((chip: string, index: number) => 
+                                    {tags.map((chip: string, index: number) => 
                                         <Chip 
                                             key={index}
                                             className={classes.chip}
