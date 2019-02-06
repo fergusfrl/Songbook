@@ -73,7 +73,9 @@ const ListView = (props: IListViewProps) => {
         song.title.toLowerCase().includes(searchStr) ||
         (song.artist && song.artist.toLowerCase().includes(searchStr)) ||
         (song.album && song.album.toLowerCase().includes(searchStr)) ||
-        (song.tags && song.tags.toLowerCase().includes(searchStr));
+        (song.tags && song.tags.filter((tag: string) => 
+            tag.toLowerCase().includes(searchStr)
+        ).length > 0);
 
     return (
         <div>
