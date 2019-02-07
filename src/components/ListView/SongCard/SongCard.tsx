@@ -12,7 +12,7 @@ import Chip from '@material-ui/core/Chip';
 
 const styles = {
     card: {
-        margin: '1em'
+        margin: '0.5em 1em'
     },
     chip: {
         margin: '0 .3em'

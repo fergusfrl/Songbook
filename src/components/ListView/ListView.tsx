@@ -19,9 +19,12 @@ import DropDownIcon from '@material-ui/icons/ArrowDropDown';
 // Components
 import SongCard from './SongCard/SongCard';
 import SearchBar from './SearchBar/SearchBar';
-import { isBoolean } from 'util';
 
 const styles = {
+    container: {
+        backgroundColor: '#fbfbfb',
+        minHeight: '93vh'
+    },
     counter: {
         marginTop: '13px',
         marginLeft: '1em'
@@ -81,7 +84,7 @@ const ListView = (props: IListViewProps) => {
         ).length > 0);
 
     return (
-        <div>
+        <div className={classes.container}>
             {isLoading ? <CircularProgress className={classes.loader} /> : (
                 <div>
                     <Grid container justify="space-between">
