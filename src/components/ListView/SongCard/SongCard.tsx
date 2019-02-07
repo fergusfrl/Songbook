@@ -9,6 +9,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
+import CardHeader from '@material-ui/core/CardHeader';
+import IconButton from '@material-ui/core/IconButton';
+
+// Icons
+import MusicIcon from '@material-ui/icons/MusicNote';
 
 const styles = {
     card: {
@@ -50,32 +55,34 @@ const SongCard = (props: ISongCardProps) => {
         <Card className={classes.card}>
             <CardActionArea>
                 <Link to={`/song/${song.id}`} className={classes.link}>
-                    <CardContent>
-                        <Typography variant="h6">
-                            {title}
-                        </Typography>
-                        <Typography variant="subtitle2" color="textSecondary">
-                            {renderSubTitle()}
-                        </Typography>
+                    <CardHeader
+                        title={<Typography variant="h6">{title}</Typography>}
+                        subheader={renderSubTitle()}
+                        // If has chords
+                        // action={
+                        //     <IconButton color="secondary">
+                        //         <MusicIcon />
+                        //     </IconButton>
+                        // }
+                    />
                         {
                             tags && tags.length > 0 && (
                                 <>
-                                    <br />
                                     <Divider />
-                                    <br />
-                                    {tags.map((chip: string, index: number) => 
-                                        <Chip 
-                                            key={index}
-                                            className={classes.chip}
-                                            label={chip}
-                                            variant="outlined"
-                                            color="secondary"
-                                        />
-                                    )}
+                                    <CardContent>
+                                        {tags.map((chip: string, index: number) => 
+                                            <Chip 
+                                                key={index}
+                                                className={classes.chip}
+                                                label={chip}
+                                                variant="outlined"
+                                                color="secondary"
+                                            />
+                                        )}
+                                    </CardContent>
                                 </>
                             ) 
                         }
-                    </CardContent>
                 </Link>
             </CardActionArea>
         </Card>
