@@ -22,7 +22,7 @@ import SearchBar from './SearchBar/SearchBar';
 
 const styles = {
     container: {
-        backgroundColor: '#fbfbfb',
+        backgroundColor: '#f2f2f2',
         minHeight: '93vh'
     },
     counter: {
