@@ -77,13 +77,12 @@ interface ISongViewProps {
     classes: any,
     fontSize: number,
     chordView: boolean,
-    setChordView: any,
-    id: string
+    setChordView: any
 }
 
 const SongView = (props: ISongViewProps) => {
-    const { location, getSingleSong, isLoading, currentSong, classes, fontSize, id } = props;
-    const { title, artist, album, tags, lyrics, chords } = currentSong;
+    const { location, getSingleSong, isLoading, currentSong, classes, fontSize } = props;
+    const { id, title, artist, album, tags, lyrics, chords } = currentSong;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [modal, setModal] = useState(false);
@@ -94,9 +93,9 @@ const SongView = (props: ISongViewProps) => {
     }, []);
 
     const renderSubTitle = () => {
-        if (artist !== "" && album !== "") return artist + " • " + album;
-        if (artist !== "") return artist;
-        if (album !== "") return album;
+        if (artist && artist !== "" && album && album !== "") return artist + " • " + album;
+        if (artist && artist !== "") return artist;
+        if (album && album !== "") return album;
         return "";
     }
 

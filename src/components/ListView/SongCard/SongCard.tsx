@@ -40,9 +40,9 @@ const SongCard = (props: ISongCardProps) => {
     const { title, artist, album, tags } = song;
 
     const renderSubTitle = () => {
-        if (artist !== "" && album !== "") return artist + " • " + album;
-        if (artist !== "") return artist;
-        if (album !== "") return album;
+        if (artist && artist !== "" && album && album !== "") return artist + " • " + album;
+        if (artist && artist !== "") return artist;
+        if (album && album !== "") return album;
         return "";
     }
 
