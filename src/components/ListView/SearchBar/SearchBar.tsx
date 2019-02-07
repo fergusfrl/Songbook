@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect }from 'react-redux';
 
 // Actions
@@ -31,7 +31,8 @@ const styles = {
         backgroundColor: 'rgba(255, 255, 255, 1)'
     },
     input: {
-        marginTop: '0.5em'
+        marginTop: '0.5em',
+        width: '65vw'
     }
 };
 
@@ -60,7 +61,12 @@ const SearchBar = (props: ISearchBarProps) => {
                 <Paper className={classes.paper} elevation={8}>
                     <Grid container justify="space-between">
                         <Grid item>
-                            <InputBase value={value} placeholder="Search" className={classes.input} onChange={handleChange} />
+                            <InputBase
+                                value={value}
+                                placeholder="Search"
+                                className={classes.input}
+                                onChange={handleChange}
+                            />
                         </Grid>
                         <Grid item>
                             <IconButton onClick={handleClick}>
