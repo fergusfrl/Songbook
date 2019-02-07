@@ -19,6 +19,7 @@ import DropDownIcon from '@material-ui/icons/ArrowDropDown';
 // Components
 import SongCard from './SongCard/SongCard';
 import SearchBar from './SearchBar/SearchBar';
+import { isBoolean } from 'util';
 
 const styles = {
     counter: {
@@ -61,10 +62,12 @@ const ListView = (props: IListViewProps) => {
 
     const sortAlphabetically = (a: any, b:any) => {
         const regex = /^[Tt][Hh][Ee] /;
+        if (!a[sortOrder]) return 1;
+        if (!b[sortOrder]) return -1;
 
-        if (a[sortOrder].replace(regex, "") < b[sortOrder].replace(regex, ""))
+        if (a[sortOrder].toLowerCase().replace(regex, "") < b[sortOrder].toLowerCase().replace(regex, ""))
             return -1;
-        if (a[sortOrder].replace(regex, "") > b[sortOrder].replace(regex, ""))
+        if (a[sortOrder].toLowerCase().replace(regex, "") > b[sortOrder].toLowerCase().replace(regex, ""))
             return 1;
         return 0;
     }
