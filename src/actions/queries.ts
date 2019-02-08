@@ -7,6 +7,7 @@ export const getAllSongsQuery = {
                 artist
                 album
                 tags
+                hasChords
             }
         }
     `
@@ -23,6 +24,7 @@ export const getSingleSongQuery = {
                 tags
                 lyrics
                 chords
+                hasChords
             }
         }
     `
@@ -37,6 +39,7 @@ export const addSongMutation = {
                 artist
                 album
                 tags
+                hasChords
             }
         }
     `
@@ -62,6 +65,7 @@ export const editSongMutation = {
                 artist
                 album
                 tags
+                hasChords
             }
         }
     `

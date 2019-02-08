@@ -32,7 +32,8 @@ interface Song {
     title: string,
     artist: string,
     album: string,
-    tags: string[]
+    tags: string[],
+    hasChords: boolean
 };
 
 interface ISongCardProps {
@@ -42,7 +43,7 @@ interface ISongCardProps {
 
 const SongCard = (props: ISongCardProps) => {
     const { classes, song } = props;
-    const { title, artist, album, tags } = song;
+    const { title, artist, album, tags, hasChords } = song;
 
     const renderSubTitle = () => {
         if (artist && artist !== "" && album && album !== "") return artist + " • " + album;
@@ -58,12 +59,11 @@ const SongCard = (props: ISongCardProps) => {
                     <CardHeader
                         title={<Typography variant="h6">{title}</Typography>}
                         subheader={renderSubTitle()}
-                        // If has chords
-                        // action={
-                        //     <IconButton color="secondary">
-                        //         <MusicIcon />
-                        //     </IconButton>
-                        // }
+                        action={ hasChords &&
+                            <IconButton color="secondary">
+                                <MusicIcon />
+                            </IconButton>
+                        }
                     />
                         {
                             tags && tags.length > 0 && (

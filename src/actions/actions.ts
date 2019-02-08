@@ -50,7 +50,8 @@ export const addNewSong = (song: any) => (dispatch: any) => {
                     album: song.album,
                     tags: song.tags,
                     lyrics: song.lyrics,
-                    chords: song.chords
+                    chords: song.chords,
+                    hasChords: song.chords !== null && song.chords !== ""
                 }
             }
         }
@@ -156,7 +157,8 @@ export const editSong = (id: string, song: any) => (dispatch: any) => {
                     album: song.album,
                     tags: song.tags,
                     lyrics: song.lyrics,
-                    chords: song.chords
+                    chords: song.chords,
+                    hasChords: song.chords !== null && song.chords !== ""
                 }
             }
         }

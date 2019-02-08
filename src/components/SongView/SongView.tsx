@@ -82,7 +82,7 @@ interface ISongViewProps {
 
 const SongView = (props: ISongViewProps) => {
     const { location, getSingleSong, isLoading, currentSong, classes, fontSize } = props;
-    const { id, title, artist, album, tags, lyrics, chords } = currentSong;
+    const { id, title, artist, album, tags, lyrics, chords, hasChords } = currentSong;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [modal, setModal] = useState(false);
@@ -141,26 +141,35 @@ const SongView = (props: ISongViewProps) => {
                         />
                     )}
                 </div>
-                <Tabs
-                    value={tab}
-                    variant="fullWidth"
-                    onChange={handleTab}
-                    indicatorColor="primary"
-                    textColor="primary"
-                >
-                    <Tab label="Lyrics" icon={<LyricsIcon />} />
-                    <Tab label="Chords" icon={<ChordsIcon />} />
-                </Tabs>
-                <Divider />
+                {
+                    hasChords ?
+                        <Tabs
+                            value={tab}
+                            variant="fullWidth"
+                            onChange={handleTab}
+                            indicatorColor="primary"
+                            textColor="primary"
+                        >
+                            <Tab label="Lyrics" icon={<LyricsIcon />} />
+                            <Tab label="Chords" icon={<ChordsIcon />} />
+                        </Tabs> :
+                        <Divider />
+                }
                 <CardContent className={classes.content}>
-                    <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
-                        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                            { lyrics }
-                        </Typography>
-                        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                            { chords }
-                        </Typography>
-                    </SwipeableViews>
+                    {
+                        hasChords ?
+                            <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
+                                <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+                                    { lyrics }
+                                </Typography>
+                                <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+                                    { chords }
+                                </Typography>
+                            </SwipeableViews> :
+                            <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+                                { lyrics }
+                            </Typography>
+                    }
                     <br />
                     <br />
                     <br />
