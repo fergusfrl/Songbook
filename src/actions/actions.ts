@@ -51,7 +51,7 @@ export const addNewSong = (song: any) => (dispatch: any) => {
                     tags: song.tags,
                     lyrics: song.lyrics,
                     chords: song.chords,
-                    hasChords: song.chords && song.chords !== ""
+                    hasChords: calculateHasChords(song.chords)
                 }
             }
         }
@@ -158,7 +158,7 @@ export const editSong = (id: string, song: any) => (dispatch: any) => {
                     tags: song.tags,
                     lyrics: song.lyrics,
                     chords: song.chords,
-                    hasChords: song.chords !== null && song.chords !== ""
+                    hasChords: calculateHasChords(song.chords)
                 }
             }
         }
@@ -170,4 +170,11 @@ export const editSong = (id: string, song: any) => (dispatch: any) => {
     }).catch(err => {
         console.log(err);
     });
+}
+
+const calculateHasChords = (chords: any) => {
+    if (chords === null) return false;
+    if (chords === undefined) return false;
+    if (chords === "") return false;
+    return true;
 }

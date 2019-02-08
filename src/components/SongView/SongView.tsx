@@ -153,11 +153,9 @@ const SongView = (props: ISongViewProps) => {
                             <Tab label="Lyrics" icon={<LyricsIcon />} />
                             <Tab label="Chords" icon={<ChordsIcon />} />
                         </Tabs> :
-                        <div>
-                            <br />
-                            <Divider />
-                        </div>
+                        <br />
                 }
+                <Divider />
                 <CardContent className={classes.content}>
                     {
                         hasChords ?
