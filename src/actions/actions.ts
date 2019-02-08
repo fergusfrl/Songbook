@@ -51,7 +51,7 @@ export const addNewSong = (song: any) => (dispatch: any) => {
                     tags: song.tags,
                     lyrics: song.lyrics,
                     chords: song.chords,
-                    hasChords: song.chords !== null && song.chords !== ""
+                    hasChords: song.chords && song.chords !== ""
                 }
             }
         }
