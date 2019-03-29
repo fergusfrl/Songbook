@@ -12,19 +12,16 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Divider from '@material-ui/core/Divider';
 
 // Icons
 import DropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 // Components
-import SongCard from './SongCard/SongCard';
+import SongListItem from './SongListItem/SongListItem';
 import SearchBar from './SearchBar/SearchBar';
 
 const styles = {
-    container: {
-        backgroundColor: '#f2f2f2',
-        minHeight: '93vh'
-    },
     counter: {
         marginTop: '13px',
         marginLeft: '1em'
@@ -64,7 +61,7 @@ const ListView = (props: IListViewProps) => {
     };
 
     const sortAlphabetically = (a: any, b:any) => {
-        const regex = /^[Tt][Hh][Ee] /;
+        const regex = /^([Tt][Hh][Ee] )|[^a-zA-Z0-9]/;
         if (!a[sortOrder]) return 1;
         if (!b[sortOrder]) return -1;
 
@@ -129,8 +126,10 @@ const ListView = (props: IListViewProps) => {
                         .filter(filterList)
                         .sort(sortAlphabetically)
                         .map((song: any, index: number) => 
-                            <SongCard key={index} song={song} />
+                            <SongListItem key={index} song={song} />
                     )}
+                    <Divider />
+                    <br />
                     <br />
                     <br />
                     <br />
