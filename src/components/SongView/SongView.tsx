@@ -22,6 +22,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
+
 // Icons
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CloseIcon from '@material-ui/icons/Close';
@@ -40,33 +44,20 @@ const styles = {
         margin: '2em auto',
         display: 'block'
     },
-    cardHeader: {
-    },
-    chips: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '0.2em 1em'
-    },
-    tag: {
-        margin: '0 .5em'
-    },
-    card: {
-        display: 'block',
-        minHeight: '100vh',
-        width: '100vw'
-    },
     link: {
         textDecoration: 'none',
         outline: 'none',
         color: 'white'
     },
-    icon: {
-        marginTop: '0.4em'
-    },
     content: {
         margin: '1.5em'
-    }
+    },
+    root: {
+        flexGrow: 1
+    },
+    grow: {
+        flexGrow: 1
+    },
 };
 
 interface ISongViewProps {
@@ -111,38 +102,35 @@ const SongView = (props: ISongViewProps) => {
     }
 
     const renderContent = () => (
-        <div className={classes.container}>
-            <Card className={classes.card}>
-                <CardHeader
-                    className={classes.cardHeader}
-                    title={<Typography align="center" variant="h5">{title}</Typography>}
-                    subheader={<Typography align="center" variant="subtitle2">{renderSubTitle()}</Typography>}
-                    avatar={
-                        <Link to="/" className={classes.link}>
-                            <IconButton>
-                                <ArrowBackIcon />
-                            </IconButton>
-                        </Link>
-                    }
-                    action={
-                        <IconButton className={classes.icon} onClick={handleMenuOpen}>
-                            <MoreVertIcon />
+        <div className={classes.root}>
+            <AppBar position="sticky" style={{ backgroundColor: '#fff' }}>
+                <Toolbar>
+                    <Link to="/" className={classes.link}>
+                        <IconButton>
+                            <ArrowBackIcon />
                         </IconButton>
-                    }
-                />
-                <div className={classes.chips}>
-                    {tags && tags.length > 0 && tags.map((tag: string, index: number) => 
-                        <Chip
-                            key={index}
-                            label={tag}
-                            variant="outlined"
-                            color="secondary"
-                            className={classes.tag}
-                        />
-                    )}
-                </div>
+                    </Link>
+                    <div style={{ margin: '1em 0.5em 0.5em 0.5em' }} className={classes.grow}>
+                        <Grid  
+                            container
+                            direction="column"
+                            justify="center"
+                            alignItems="center"
+                        >
+                            <Grid item style={{ padding: '0.2em 0' }}>
+                                <Typography variant="title">{title}</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="subheading" color="textSecondary">{renderSubTitle()}</Typography>
+                            </Grid>
+                        </Grid>
+                    </div>
+                    <IconButton className={classes.icon} onClick={handleMenuOpen}>
+                        <MoreVertIcon />
+                    </IconButton>
+                </Toolbar>
                 {
-                    hasChords ?
+                    hasChords &&
                         <Tabs
                             value={tab}
                             variant="fullWidth"
@@ -150,32 +138,30 @@ const SongView = (props: ISongViewProps) => {
                             indicatorColor="primary"
                             textColor="primary"
                         >
-                            <Tab label="Lyrics" icon={<LyricsIcon />} />
-                            <Tab label="Chords" icon={<ChordsIcon />} />
-                        </Tabs> :
-                        <br />
+                            <Tab label="Lyrics"  />
+                            <Tab label="Chords"  />
+                        </Tabs>
                 }
-                <Divider />
-                <CardContent className={classes.content}>
-                    {
-                        hasChords ?
-                            <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
-                                <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                                    { lyrics }
-                                </Typography>
-                                <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                                    { chords }
-                                </Typography>
-                            </SwipeableViews> :
+            </AppBar>
+            <div className={classes.content}>
+                {   
+                    hasChords ?
+                        <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
                             <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
                                 { lyrics }
                             </Typography>
-                    }
-                    <br />
-                    <br />
-                    <br />
-                </CardContent>
-            </Card>
+                            <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+                                { chords }
+                            </Typography>
+                        </SwipeableViews> :
+                        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+                            { lyrics }
+                        </Typography>
+                }
+                <br />
+                <br />
+                <br />
+            </div>
             <SliderBar />
             <DeleteModal songName={title} id={id} open={modal} handleClose={handleModalClose} />
         </div>
