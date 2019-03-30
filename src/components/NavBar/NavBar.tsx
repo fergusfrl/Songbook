@@ -6,8 +6,12 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Drawer from '@material-ui/core/Drawer';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 // Icons
@@ -15,6 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
+import FilterIcon from '@material-ui/icons/FilterList';
 
 interface navBarProps {
     classes: any,
@@ -33,7 +38,7 @@ const styles = {
 };
 
 const NavBar = (props: navBarProps) => {
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [drawer, setDrawer] = useState(false);
     const { classes, pathname } = props;
     const listView = pathname === '/';
 
@@ -43,8 +48,7 @@ const NavBar = (props: navBarProps) => {
         return "Songbook";
     }
 
-    const handleOpenMenu = (e: any) => setAnchorEl(e.currentTarget);
-    const handleCloseMenu = () => setAnchorEl(null);
+    const toggleDrawer = () => setDrawer(!drawer);
 
     return ( 
         !pathname.includes('song') ? (
@@ -52,7 +56,7 @@ const NavBar = (props: navBarProps) => {
                 <AppBar position="fixed" className={classes.appbar}>
                     <Toolbar>
                         {listView ?
-                            <IconButton color="inherit" onClick={handleOpenMenu}>
+                            <IconButton color="inherit" onClick={toggleDrawer}>
                                 <MenuIcon />
                             </IconButton>  :
                             <Link to="/" className={classes.link}>
@@ -66,16 +70,16 @@ const NavBar = (props: navBarProps) => {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
-                    <Link to="/add" className={classes.link} onClick={handleCloseMenu}>
-                        <MenuItem>
-                            <ListItemIcon>
-                                <AddIcon />
-                            </ListItemIcon>   
-                            Add New Song
-                        </MenuItem>
-                    </Link>
-                </Menu>
+                <Drawer open={drawer} onClose={toggleDrawer}>
+                    <List>
+                        <Link to="/add" className={classes.link} onClick={toggleDrawer}>
+                            <ListItem button>
+                                <ListItemIcon><AddIcon /></ListItemIcon>
+                                <ListItemText primary="Add New Song" />
+                            </ListItem>
+                        </Link>
+                    </List>
+                </Drawer>
                 <br />
                 <br />
                 <br />
