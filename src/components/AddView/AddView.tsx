@@ -112,8 +112,8 @@ const AddView = (props: IAddViewProps) => {
                 alignItems="center"
             >
                 {
-                    INPUTS.map((input: any) =>
-                        <Grid item>
+                    INPUTS.map((input: any, index: number) =>
+                        <Grid item key={index}>
                             {
                                 input.id !== 'tags' ?
                                     <TextField
