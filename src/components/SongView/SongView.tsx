@@ -118,10 +118,10 @@ const SongView = (props: ISongViewProps) => {
                             alignItems="center"
                         >
                             <Grid item style={{ padding: '0.2em 0' }}>
-                                <Typography variant="title">{title}</Typography>
+                                <Typography align="center" variant="title">{title}</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant="subheading" color="textSecondary">{renderSubTitle()}</Typography>
+                                <Typography align="center" variant="subheading" color="textSecondary">{renderSubTitle()}</Typography>
                             </Grid>
                         </Grid>
                     </div>
