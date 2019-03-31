@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch, RouteComponentProps } from 'react-router-dom';
 
 // Actions
-import { getAllSongs } from '../actions/actions';
+import { getAllSongs, closeSnackbar } from '../actions/actions';
+
+// Material UI
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+
+// Icons
+import CloseIcon from '@material-ui/icons/Close';
 
 // Components
 import NavBar from './NavBar/NavBar';
@@ -15,7 +22,9 @@ interface IAppViewProps extends RouteComponentProps<any> {
     location: any,
     getAllSongs: any,
     songList: any[],
-    previousView: any
+    previousView: any,
+    closeSnackbar: any,
+    snackbar: any
 }
 
 class AppView extends Component<IAppViewProps> {
@@ -32,7 +41,8 @@ class AppView extends Component<IAppViewProps> {
     }
 
     render() {
-        const { location } = this.props;
+        const { location, closeSnackbar } = this.props;
+        const { open, message } = this.props.snackbar;
         const modal = location.state && location.state.to === 'modal';
 
         return (
@@ -50,15 +60,27 @@ class AppView extends Component<IAppViewProps> {
                         <Route path='/song/:id' component={SongView} />
                     </Switch>
                 </div>
+                <Snackbar
+                    open={open}
+                    onClose={closeSnackbar}
+                    message={message}
+                    autoHideDuration={5000}
+                    action={[
+                        <IconButton color="inherit" >
+                            <CloseIcon />
+                        </IconButton>
+                    ]}
+                />
             </Fragment>
         );
     }
 };
 
 const mapStateToProps = (state: any) => ({
-    songList: state.songList
+    songList: state.songList,
+    snackbar: state.snackbar
 })
   
 export default withRouter(
-    connect(mapStateToProps, { getAllSongs })(AppView) as any
+    connect(mapStateToProps, { getAllSongs, closeSnackbar })(AppView) as any
 );

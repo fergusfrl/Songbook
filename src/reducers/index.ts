@@ -7,6 +7,7 @@ import searchStr from './searchStringReducer';
 import view from './viewReducer';
 import currentSongRequest from './currentSongReducer';
 import lyricViewConfig from './lyricViewConfigReducer';
+import snackbar from './snackbarReducer';
 
 export default combineReducers({
     songListRequest,
@@ -14,5 +15,6 @@ export default combineReducers({
     searchStr,
     view,
     currentSongRequest,
-    lyricViewConfig
+    lyricViewConfig,
+    snackbar
 });

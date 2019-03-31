@@ -12,3 +12,5 @@ export const SET_FONT_SIZE: string = "SET_FONT_SIZE";
 export const SET_CHORD_VIEW: string = "SET_CHORD_VIEW";
 export const DELETE_SONG: string = "DELETE_SONG";
 export const EDIT_SONG: string = "EDIT_SONG";
+export const DISPLAY_SNACKBAR: string = "DISPLAY_SNACKBAR";
+export const CLOSE_SNACKBAR: string = "CLOSE_SNACKBAR";

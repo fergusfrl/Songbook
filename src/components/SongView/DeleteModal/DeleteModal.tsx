@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // Actions
-import { deleteSong } from '../../../actions/actions';
+import { deleteSong, displaySnackbar } from '../../../actions/actions';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -20,7 +20,8 @@ interface IDeleteModalProps {
     open: boolean,
     handleClose: any,
     id: string,
-    deleteSong: any
+    deleteSong: any,
+    displaySnackbar: any
 };
 
 const styles = {
@@ -30,11 +31,12 @@ const styles = {
 };
 
 const DeleteModal = (props: IDeleteModalProps) => {
-    const { classes, songName, open, handleClose, id, deleteSong } = props;
+    const { classes, songName, open, handleClose, id, deleteSong, displaySnackbar } = props;
 
     const handleDelete = () => {
         deleteSong(id);
         handleClose();
+        displaySnackbar("Song successfully deleted");
     }
 
     return ( 
@@ -58,4 +60,4 @@ const DeleteModal = (props: IDeleteModalProps) => {
     );
 };
   
-export default connect(null, { deleteSong })(withStyles(styles)(DeleteModal));
+export default connect(null, { deleteSong, displaySnackbar })(withStyles(styles)(DeleteModal));

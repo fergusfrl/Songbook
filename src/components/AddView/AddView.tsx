@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
 // Actions
-import { addNewSong, editSong } from '../../actions/actions';
+import { addNewSong, editSong, displaySnackbar } from '../../actions/actions';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -45,7 +45,8 @@ interface IAddViewProps {
     classes: any,
     addNewSong: any,
     currentSong: any,
-    editSong: any
+    editSong: any,
+    displaySnackbar: any
 }
 
 const INPUTS = [
@@ -58,7 +59,7 @@ const INPUTS = [
 ];
 
 const AddView = (props: IAddViewProps) => {
-    const { classes, addNewSong, currentSong, editSong } = props;
+    const { classes, addNewSong, currentSong, editSong, displaySnackbar } = props;
 
     const x: Record<"root", string> = {root: 'yo'};
 
@@ -74,9 +75,13 @@ const AddView = (props: IAddViewProps) => {
     const [state, setState] = useState(initialState);
 
     const handleSave = () => {
-        Object.keys(currentSong).length > 0 ? 
-            editSong(currentSong.id, state) :
+        if (Object.keys(currentSong).length > 0) {
+            editSong(currentSong.id, state);
+            displaySnackbar("Song successfully updated");
+        } else {
             addNewSong(state);
+            displaySnackbar("Song successfully added");
+        }
     }
 
     const handleChange = (e: any) => {
@@ -174,5 +179,5 @@ const mapStateToProps = (state: any) => ({
   
 export default connect(
     mapStateToProps,
-    { addNewSong, editSong }
+    { addNewSong, editSong, displaySnackbar }
 )(withStyles(styles)(AddView));

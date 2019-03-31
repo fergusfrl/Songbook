@@ -14,7 +14,9 @@ import {
     SET_CHORD_VIEW,
     DELETE_SONG,
     REMOVE_CURRENT_SONG,
-    EDIT_SONG
+    EDIT_SONG,
+    DISPLAY_SNACKBAR,
+    CLOSE_SNACKBAR
 } from './types';
 
 const server: any = process.env.REACT_APP_SERVER_LOCATION;
@@ -121,6 +123,17 @@ export const setChordView = (on: boolean) => (dispatch: any) => {
         type: SET_CHORD_VIEW,
         payload: on
     });
+};
+
+export const displaySnackbar = (message: string) => (dispatch: any) => {
+    dispatch({
+        type: DISPLAY_SNACKBAR,
+        payload: message
+    });
+};
+
+export const closeSnackbar = () => (dispatch: any) => {
+    dispatch({ type: CLOSE_SNACKBAR });
 };
 
 export const deleteSong = (id: string) => (dispatch: any) => {
