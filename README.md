@@ -6,9 +6,10 @@ A family songbook to keep track of lyrics and chords for our favourite sing-a-lo
 ### Quick Start
 
 #### Environment Details / Requirements
-- Node 8.9.3
-- npm 6.7.0
-
+```
+# node 8.9.3
+# npm 6.7.0
+```
 
 #### Steps
 1. Start [Songbook server](https://github.com/fergusfrl/Songbook_GQL_Server)
