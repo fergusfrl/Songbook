@@ -64,9 +64,9 @@ class AppView extends Component<IAppViewProps> {
                     open={open}
                     onClose={closeSnackbar}
                     message={message}
-                    autoHideDuration={5000}
+                    autoHideDuration={4000}
                     action={[
-                        <IconButton color="inherit" >
+                        <IconButton color="inherit" onClick={closeSnackbar}>
                             <CloseIcon />
                         </IconButton>
                     ]}
