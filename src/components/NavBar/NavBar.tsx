@@ -7,8 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -72,6 +71,13 @@ const NavBar = (props: navBarProps) => {
                 </AppBar>
                 <Drawer open={drawer} onClose={toggleDrawer}>
                     <List>
+                        <ListItem>
+                            <ListItemIcon>
+                                <img src={process.env.PUBLIC_URL + '/img/icon-72x72.png'} width="35" height="35" />
+                            </ListItemIcon>
+                            <ListItemText primary="Songbook" secondary="v1.0.0" />
+                        </ListItem>
+                        <Divider />
                         <Link to="/add" className={classes.link} onClick={toggleDrawer}>
                             <ListItem button>
                                 <ListItemIcon><AddIcon /></ListItemIcon>
