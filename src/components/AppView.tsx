@@ -78,7 +78,8 @@ class AppView extends Component<IAppViewProps> {
 
 const mapStateToProps = (state: any) => ({
     songList: state.songList,
-    snackbar: state.snackbar
+    snackbar: state.snackbar,
+
 })
   
 export default withRouter(

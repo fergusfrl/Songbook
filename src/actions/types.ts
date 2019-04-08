@@ -14,3 +14,4 @@ export const DELETE_SONG: string = "DELETE_SONG";
 export const EDIT_SONG: string = "EDIT_SONG";
 export const DISPLAY_SNACKBAR: string = "DISPLAY_SNACKBAR";
 export const CLOSE_SNACKBAR: string = "CLOSE_SNACKBAR";
+export const SET_CURRENT_SONG: string = "SET_CURRENT_SONG";

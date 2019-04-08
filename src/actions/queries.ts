@@ -17,14 +17,8 @@ export const getSingleSongQuery = {
     query: `
         query getSingleSong($id: ID!) {
             song(id: $id) {
-                id
-                title
-                artist
-                album
-                tags
                 lyrics
                 chords
-                hasChords
             }
         }
     `

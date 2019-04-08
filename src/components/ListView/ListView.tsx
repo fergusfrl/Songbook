@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 // Actions
-import { setSortOrder, removeCurrentSong } from '../../actions/actions'
+import { setSortOrder, removeCurrentSong, setCurrentSong } from '../../actions/actions'
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -42,11 +42,12 @@ interface IListViewProps {
     sortOrder: string,
     searchStr: string,
     isLoading: boolean,
-    removeCurrentSong: any
+    removeCurrentSong: any,
+    setCurrentSong: any
 }
 
 const ListView = (props: IListViewProps) => {
-    const { classes, songList, sortOrder, setSortOrder, searchStr, isLoading, removeCurrentSong } = props;
+    const { classes, songList, sortOrder, setSortOrder, searchStr, isLoading, removeCurrentSong, setCurrentSong } = props;
     const [anchorEl, setAnchorEl] = useState(null);
 
     useEffect(() => {
@@ -126,7 +127,7 @@ const ListView = (props: IListViewProps) => {
                         .filter(filterList)
                         .sort(sortAlphabetically)
                         .map((song: any, index: number) => 
-                            <SongListItem key={index} song={song} />
+                            <SongListItem key={index} song={song} setCurrentSong={setCurrentSong} />
                     )}
                     <Divider />
                     <br />
@@ -148,4 +149,7 @@ const mapStateToProps = (state: any) => ({
     searchStr: state.searchStr
 })
   
-export default connect(mapStateToProps, { setSortOrder, removeCurrentSong })(withStyles(styles)(ListView));
+export default connect(
+    mapStateToProps,
+    { setSortOrder, removeCurrentSong, setCurrentSong }
+)(withStyles(styles)(ListView));

@@ -29,11 +29,12 @@ interface Song {
 
 interface ISongListItemProps {
     classes: any,
-    song: Song
+    song: Song,
+    setCurrentSong: any
 };
 
 const SongListItem = (props: ISongListItemProps) => {
-    const { classes, song } = props;
+    const { classes, song, setCurrentSong } = props;
     const { title, artist, album, tags, hasChords } = song;
 
     const renderSubTitle = () => {
@@ -43,11 +44,13 @@ const SongListItem = (props: ISongListItemProps) => {
         return "";
     }
 
+    const handleSongClick = () => setCurrentSong(title, artist, album, hasChords);
+
     return (
         <Fragment>
             <Divider />
             <Link to={`/song/${song.id}`} className={classes.link}>
-                <ListItem button>
+                <ListItem button onClick={handleSongClick}>
                     <ListItemText primary={title} secondary={renderSubTitle()} />
                     {hasChords && (                
                         <ListItemIcon>

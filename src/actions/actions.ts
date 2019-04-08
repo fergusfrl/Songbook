@@ -16,7 +16,8 @@ import {
     REMOVE_CURRENT_SONG,
     EDIT_SONG,
     DISPLAY_SNACKBAR,
-    CLOSE_SNACKBAR
+    CLOSE_SNACKBAR,
+    SET_CURRENT_SONG
 } from './types';
 
 const server: any = process.env.REACT_APP_SERVER_LOCATION;
@@ -135,6 +136,14 @@ export const displaySnackbar = (message: string) => (dispatch: any) => {
 export const closeSnackbar = () => (dispatch: any) => {
     dispatch({ type: CLOSE_SNACKBAR });
 };
+
+export const setCurrentSong = (title: string, artist: string, album:string, hasChords: boolean) => 
+    (dispatch: any) => {
+        dispatch({
+            type: SET_CURRENT_SONG,
+            payload: { title, artist, album, hasChords }
+        });
+    }
 
 export const deleteSong = (id: string) => (dispatch: any) => {
     axios({

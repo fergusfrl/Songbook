@@ -12,11 +12,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
-import Divider from '@material-ui/core/Divider';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -28,12 +23,9 @@ import Grid from '@material-ui/core/Grid';
 
 // Icons
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import LyricsIcon from '@material-ui/icons/Notes';
-import ChordsIcon from '@material-ui/icons/QueueMusic';
 
 // Components
 import SliderBar from './SliderBar/SliderBar';
@@ -101,75 +93,71 @@ const SongView = (props: ISongViewProps) => {
         handleModalOpen();
     }
 
-    const renderContent = () => (
-        <div className={classes.root}>
-            <AppBar position="sticky" style={{ backgroundColor: '#fff' }}>
-                <Toolbar>
-                    <Link to="/" className={classes.link}>
-                        <IconButton>
-                            <ArrowBackIcon />
-                        </IconButton>
-                    </Link>
-                    <div style={{ margin: '1em 0.5em 0.5em 0.5em' }} className={classes.grow}>
-                        <Grid  
-                            container
-                            direction="column"
-                            justify="center"
-                            alignItems="center"
-                        >
-                            <Grid item style={{ padding: '0.2em 0' }}>
-                                <Typography align="center" variant="title">{title}</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography align="center" variant="subheading" color="textSecondary">{renderSubTitle()}</Typography>
-                            </Grid>
-                        </Grid>
-                    </div>
-                    <IconButton className={classes.icon} onClick={handleMenuOpen}>
-                        <MoreVertIcon />
-                    </IconButton>
-                </Toolbar>
-                {
-                    hasChords &&
-                        <Tabs
-                            value={tab}
-                            variant="fullWidth"
-                            onChange={handleTab}
-                            indicatorColor="primary"
-                            textColor="primary"
-                        >
-                            <Tab label="Lyrics"  />
-                            <Tab label="Chords"  />
-                        </Tabs>
-                }
-            </AppBar>
-            <div className={classes.content}>
-                {   
-                    hasChords ?
-                        <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
-                            <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                                { lyrics }
-                            </Typography>
-                            <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                                { chords }
-                            </Typography>
-                        </SwipeableViews> :
-                        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-                            { lyrics }
-                        </Typography>
-                }
-                <br />
-                <br />
-                <br />
-            </div>
-            <SliderBar />
-            <DeleteModal songName={title} id={id} open={modal} handleClose={handleModalClose} />
-        </div>
-    )
+    const renderTypography = (content: string) => (
+        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
+            { content }
+        </Typography>
+    );
+
+    const renderContent = () => hasChords ?
+        <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
+            { renderTypography(lyrics) }
+            { renderTypography(chords) }
+        </SwipeableViews> :
+        renderTypography(lyrics);
 
     return (
         <Fragment>
-            { isLoading ? <CircularProgress className={classes.loader} /> : renderContent() }
+            <div className={classes.root}>
+                <AppBar position="sticky" style={{ backgroundColor: '#fff' }}>
+                    <Toolbar>
+                        <Link to="/" className={classes.link}>
+                            <IconButton>
+                                <ArrowBackIcon />
+                            </IconButton>
+                        </Link>
+                        <div style={{ margin: '1em 0.5em 0.5em 0.5em' }} className={classes.grow}>
+                            <Grid  
+                                container
+                                direction="column"
+                                justify="center"
+                                alignItems="center"
+                            >
+                                <Grid item style={{ padding: '0.2em 0' }}>
+                                    <Typography align="center" variant="title">{title}</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography align="center" variant="subheading" color="textSecondary">{renderSubTitle()}</Typography>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        <IconButton className={classes.icon} onClick={handleMenuOpen}>
+                            <MoreVertIcon />
+                        </IconButton>
+                    </Toolbar>
+                    {
+                        hasChords &&
+                            <Tabs
+                                value={tab}
+                                variant="fullWidth"
+                                onChange={handleTab}
+                                indicatorColor="primary"
+                                textColor="primary"
+                            >
+                                <Tab label="Lyrics"  />
+                                <Tab label="Chords"  />
+                            </Tabs>
+                    }
+                </AppBar>
+                    <div className={classes.content}>
+                    { isLoading ? <CircularProgress className={classes.loader} /> : renderContent() }
+                    <br />
+                    <br />
+                    <br />
+                </div>
+                <SliderBar />
+                <DeleteModal songName={title} id={id} open={modal} handleClose={handleModalClose} />
+            </div>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
                 <Link to={`/edit/${currentSong.id}`} className={classes.link}>
                     <MenuItem onClick={handleMenuClose}>
