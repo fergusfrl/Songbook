@@ -13,10 +13,7 @@ export default function(state = initialState, action: any) {
                 open: true
             };
         case CLOSE_SNACKBAR:
-            return {
-                message: "",
-                open: false
-            };
+            return initialState;
         default:
             return state;
     };

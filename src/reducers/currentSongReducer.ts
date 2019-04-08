@@ -17,6 +17,7 @@ export default function(state = initialState, action: any) {
                 isLoading: false,
                 currentSong: {
                     ...state.currentSong,
+                    id: action.payload.id,
                     lyrics: action.payload.lyrics,
                     chords: action.payload.chords
                 }
