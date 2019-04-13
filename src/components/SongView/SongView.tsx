@@ -150,7 +150,8 @@ const SongView = (props: ISongViewProps) => {
                     }
                 </AppBar>
                     <div className={classes.content}>
-                    { isLoading ? <CircularProgress className={classes.loader} /> : renderContent() }
+                    {/* { isLoading ? <CircularProgress className={classes.loader} /> : renderContent() } */}
+                    { renderContent() }
                     <br />
                     <br />
                     <br />

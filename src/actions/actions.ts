@@ -137,11 +137,11 @@ export const closeSnackbar = () => (dispatch: any) => {
     dispatch({ type: CLOSE_SNACKBAR });
 };
 
-export const setCurrentSong = (title: string, artist: string, album:string, hasChords: boolean) => 
+export const setCurrentSong = (song: any) => 
     (dispatch: any) => {
         dispatch({
             type: SET_CURRENT_SONG,
-            payload: { title, artist, album, hasChords }
+            payload: song
         });
     }
 

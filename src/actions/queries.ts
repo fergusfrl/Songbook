@@ -8,6 +8,8 @@ export const getAllSongsQuery = {
                 album
                 tags
                 hasChords
+                lyrics
+                chords
             }
         }
     `
@@ -18,6 +20,11 @@ export const getSingleSongQuery = {
         query getSingleSong($id: ID!) {
             song(id: $id) {
                 id
+                title
+                artist
+                album
+                tags
+                hasChords
                 lyrics
                 chords
             }
@@ -35,6 +42,8 @@ export const addSongMutation = {
                 album
                 tags
                 hasChords
+                lyrics
+                chords
             }
         }
     `
@@ -61,6 +70,8 @@ export const editSongMutation = {
                 album
                 tags
                 hasChords
+                lyrics
+                chords
             }
         }
     `

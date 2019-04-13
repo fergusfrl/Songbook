@@ -15,12 +15,7 @@ export default function(state = initialState, action: any) {
         case GET_SINGLE_SONG:
             return {
                 isLoading: false,
-                currentSong: {
-                    ...state.currentSong,
-                    id: action.payload.id,
-                    lyrics: action.payload.lyrics,
-                    chords: action.payload.chords
-                }
+                currentSong: action.payload
             }
         case REMOVE_CURRENT_SONG:
             return {
@@ -30,13 +25,7 @@ export default function(state = initialState, action: any) {
         case SET_CURRENT_SONG:
             return {
                 ...state,
-                currentSong: {
-                    ...state.currentSong,
-                    title: action.payload.title,
-                    artist: action.payload.artist,
-                    album: action.payload.album,
-                    hasChords: action.payload.hasChords
-                }
+                currentSong: action.payload
             }
         default:
             return state;

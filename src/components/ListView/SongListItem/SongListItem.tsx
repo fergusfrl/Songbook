@@ -46,7 +46,7 @@ const SongListItem = (props: ISongListItemProps) => {
         return "";
     }
 
-    const handleSongClick = () => setCurrentSong(title, artist, album, hasChords, lyrics, chords);
+    const handleSongClick = () => setCurrentSong({ title, artist, album, hasChords, lyrics, chords });
 
     return (
         <Fragment>

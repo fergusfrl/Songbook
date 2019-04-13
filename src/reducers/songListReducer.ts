@@ -22,16 +22,7 @@ export default function(state = initialState, action: any) {
                 ...state,
                 songList: [
                     ...state.songList,
-                    {
-                        id: action.payload.id,
-                        title: action.payload.title,
-                        artist: action.payload.artist,
-                        album: action.payload.album,
-                        tags: action.payload.tags,
-                        lyrics: action.payload.lyrics,
-                        chords: action.payload.chords,
-                        hasChords: action.payload.hasChords
-                    }
+                    { ...action.payload }
                 ]
             };
         case DELETE_SONG:
@@ -44,16 +35,7 @@ export default function(state = initialState, action: any) {
                 ...state,
                 songList: [
                     ...state.songList.filter((song: any) => song.id !== action.payload.id),
-                    {
-                        id: action.payload.id,
-                        title: action.payload.title,
-                        artist: action.payload.artist,
-                        album: action.payload.album,
-                        tags: action.payload.tags,
-                        lyrics: action.payload.lyrics,
-                        chords: action.payload.chords,
-                        hasChords: action.payload.hasChords
-                    }
+                    { ...action.payload }
                 ]
             }
         default:
