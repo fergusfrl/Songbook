@@ -70,21 +70,6 @@ export const getSingleSong = (id: string) => (dispatch: any) => {
         GET_SINGLE_SONG,
         dispatch
     );
-    // axios({
-    //     url: server,
-    //     method: 'post',
-    //     data: {
-    //         ...getSingleSongQuery,
-    //         variables: { id: id }
-    //     }
-    // }).then(res => {
-    //     dispatch({
-    //         type: GET_SINGLE_SONG,
-    //         payload: res.data.data.song
-    //     });
-    // }).catch(err => {
-    //     console.log(err);
-    // });
 };
 
 export const removeCurrentSong = () => (dispatch: any) => {
@@ -130,60 +115,18 @@ export const deleteSong = (id: string) => (dispatch: any) => {
         DELETE_SONG,
         dispatch
     );
-    // axios({
-    //     url: server,
-    //     method: 'post',
-    //     data: {
-    //         ...deleteSongMutation,
-    //         variables: {
-    //             id: id
-    //         }
-    //     }
-    // }).then(res => {
-    //     dispatch({
-    //         type: DELETE_SONG,
-    //         payload: res.data.data.deleteSong
-    //     });
-    // }).catch(err => {
-    //     console.log(err);
-    // });
 };
 
 export const editSong = (id: string, song: any) => (dispatch: any) => {
     makeRequest(
         { url: `${server}/${id}`, method: 'put', data: {
+            id,
             ...song,
             hasChords: calculateHasChords(song.chords)
         } },
         EDIT_SONG,
         dispatch
     );
-    // axios({
-    //     url: server,
-    //     method: 'post',
-    //     data: {
-    //         ...editSongMutation,
-    //         variables: {
-    //             id: id,
-    //             input: {
-    //                 title: song.title,
-    //                 artist: song.artist,
-    //                 album: song.album,
-    //                 tags: song.tags,
-    //                 lyrics: song.lyrics,
-    //                 chords: song.chords,
-    //                 hasChords: calculateHasChords(song.chords)
-    //             }
-    //         }
-    //     }
-    // }).then(res => {
-    //     dispatch({
-    //         type: EDIT_SONG,
-    //         payload: res.data.data.editSong
-    //     });
-    // }).catch(err => {
-    //     console.log(err);
-    // });
 }
 
 const calculateHasChords = (chords: any) => {

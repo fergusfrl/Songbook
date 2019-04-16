@@ -76,7 +76,7 @@ const AddView = (props: IAddViewProps) => {
 
     const handleSave = () => {
         if (Object.keys(currentSong).length > 0) {
-            editSong(currentSong.id, state);
+            editSong(currentSong._id, state);
             displaySnackbar("Song successfully updated");
         } else {
             addNewSong(state);

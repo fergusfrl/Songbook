@@ -64,8 +64,8 @@ interface ISongViewProps {
 }
 
 const SongView = (props: ISongViewProps) => {
-    const { location, getSingleSong, isLoading, currentSong, classes, fontSize } = props;
-    const { _id, title, artist, album, tags, lyrics, chords, hasChords } = currentSong;
+    const { location, getSingleSong, currentSong, classes, fontSize } = props;
+    const { _id, title, artist, album, lyrics, chords, hasChords } = currentSong;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [modal, setModal] = useState(false);
@@ -157,10 +157,10 @@ const SongView = (props: ISongViewProps) => {
                     <br />
                 </div>
                 <SliderBar />
-                <DeleteModal songName={title} id={_id} open={modal} handleClose={handleModalClose} />
+                <DeleteModal songName={title} _id={_id} open={modal} handleClose={handleModalClose} />
             </div>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-                <Link to={`/edit/${currentSong.id}`} className={classes.link}>
+                <Link to={`/edit/${_id}`} className={classes.link}>
                     <MenuItem onClick={handleMenuClose}>
                         <ListItemIcon>
                             <EditIcon />

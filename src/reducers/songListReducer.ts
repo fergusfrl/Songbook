@@ -28,14 +28,14 @@ export default function(state = initialState, action: any) {
         case DELETE_SONG:
             return {
                 ...state,
-                songList: state.songList.filter((song: any) => song.id !== action.payload.id)
+                songList: state.songList.filter((song: any) => song._id !== action.payload.id)
             }
         case EDIT_SONG:
             return {
                 ...state,
                 songList: [
-                    ...state.songList.filter((song: any) => song.id !== action.payload.id),
-                    { ...action.payload }
+                    ...state.songList.filter((song: any) => song._id !== action.payload._id),
+                    action.payload
                 ]
             }
         default:

@@ -19,7 +19,7 @@ interface IDeleteModalProps {
     songName: string,
     open: boolean,
     handleClose: any,
-    id: string,
+    _id: string,
     deleteSong: any,
     displaySnackbar: any
 };
@@ -31,10 +31,10 @@ const styles = {
 };
 
 const DeleteModal = (props: IDeleteModalProps) => {
-    const { classes, songName, open, handleClose, id, deleteSong, displaySnackbar } = props;
+    const { classes, songName, open, handleClose, _id, deleteSong, displaySnackbar } = props;
 
     const handleDelete = () => {
-        deleteSong(id);
+        deleteSong(_id);
         handleClose();
         displaySnackbar("Song successfully deleted");
     }
