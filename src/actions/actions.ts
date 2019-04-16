@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getAllSongsQuery, getSingleSongQuery, addSongMutation, deleteSongMutation, editSongMutation } from './queries';
 import { 
     GET_ALL_SONGS, 
     GET_SINGLE_SONG, 
@@ -41,32 +40,6 @@ export const addNewSong = (song: any) => (dispatch: any) => {
         ADDED_NEW_SONG,
         dispatch
     );
-    // axios({
-    //     url: server,
-    //     method: 'post',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     data: {
-    //         ...addSongMutation,
-    //         variables: {
-    //             input: { 
-    //                 title: song.title,
-    //                 artist: song.artist,
-    //                 album: song.album,
-    //                 tags: song.tags,
-    //                 lyrics: song.lyrics,
-    //                 chords: song.chords,
-    //                 hasChords: calculateHasChords(song.chords)
-    //             }
-    //         }
-    //     }
-    // })
-    //     .then(res => 
-    //         dispatch({
-    //             type: ADDED_NEW_SONG,
-    //             payload: res.data.data.addNewSong
-    //         })
-    //     )
-    //     .catch(err => console.log(err));
 }
 
 export const setSortOrder = (sortOrder: string) => (dispatch: any) => {
