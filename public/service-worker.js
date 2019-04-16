@@ -13,7 +13,7 @@ if (workbox) {
 
     workbox.routing.registerRoute(
         /^http:\/\/localhost:3001\/.*$/,
-        workbox.strategies.cacheFirst()
+        workbox.strategies.networkFirst()
     );
 
 } else {
