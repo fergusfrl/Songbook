@@ -27,7 +27,10 @@ export default function(state = initialState, action: any) {
                         title: action.payload.title,
                         artist: action.payload.artist,
                         album: action.payload.album,
-                        tags: action.payload.tags
+                        tags: action.payload.tags,
+                        lyrics: action.payload.lyrics,
+                        chords: action.payload.chords,
+                        hasChords: action.payload.hasChords
                     }
                 ]
             };
@@ -46,7 +49,10 @@ export default function(state = initialState, action: any) {
                         title: action.payload.title,
                         artist: action.payload.artist,
                         album: action.payload.album,
-                        tags: action.payload.tags
+                        tags: action.payload.tags,
+                        lyrics: action.payload.lyrics,
+                        chords: action.payload.chords,
+                        hasChords: action.payload.hasChords
                     }
                 ]
             }

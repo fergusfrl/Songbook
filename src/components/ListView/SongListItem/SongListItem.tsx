@@ -24,6 +24,8 @@ interface Song {
     artist: string,
     album: string,
     tags: string[],
+    lyrics: string,
+    chords: string,
     hasChords: boolean
 };
 
@@ -35,7 +37,7 @@ interface ISongListItemProps {
 
 const SongListItem = (props: ISongListItemProps) => {
     const { classes, song, setCurrentSong } = props;
-    const { title, artist, album, tags, hasChords } = song;
+    const { title, artist, album, tags, hasChords, lyrics, chords } = song;
 
     const renderSubTitle = () => {
         if (artist && artist !== "" && album && album !== "") return artist + " • " + album;
@@ -44,7 +46,7 @@ const SongListItem = (props: ISongListItemProps) => {
         return "";
     }
 
-    const handleSongClick = () => setCurrentSong(title, artist, album, hasChords);
+    const handleSongClick = () => setCurrentSong(title, artist, album, hasChords, lyrics, chords);
 
     return (
         <Fragment>
