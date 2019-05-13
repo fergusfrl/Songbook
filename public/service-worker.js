@@ -2,7 +2,7 @@ if (workbox) {
     console.log('Yay! Workbox is loaded 🎉');
 
     workbox.routing.registerRoute(
-        'http://localhost:5000/',
+        'https://songbookclient.herokuapp.com/',
         workbox.strategies.cacheFirst()
     );
 
@@ -12,7 +12,7 @@ if (workbox) {
     );
 
     workbox.routing.registerRoute(
-        /^http:\/\/localhost:3001\/.*$/,
+        /^https:\/\/songbookserver.herokuapp.com\/graphql\/.*$/,
         workbox.strategies.networkFirst()
     );
 
