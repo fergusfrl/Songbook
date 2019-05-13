@@ -12,7 +12,7 @@ if (workbox) {
     );
 
     workbox.routing.registerRoute(
-        /^https:\/\/songbookserver.herokuapp.com\/graphql\/.*$/,
+        /^https:\/\/songbookserver.herokuapp.com\/.*$/,
         workbox.strategies.networkFirst()
     );
 
