@@ -2,7 +2,7 @@ if (workbox) {
     console.log('Yay! Workbox is loaded 🎉');
 
     workbox.routing.registerRoute(
-        'https://songbookclient-dev.herokuapp.com/',
+        /^https:\/\/songbookclient-dev.herokuapp.com\/.*$/,
         workbox.strategies.cacheFirst()
     );
 
