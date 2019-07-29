@@ -13,7 +13,7 @@ if (workbox) {
 
     workbox.routing.registerRoute(
         /^https:\/\/songbookserver-dev.herokuapp.com\/.*$/,
-        workbox.strategies.cacheFirst()
+        workbox.strategies.StaleWhileRevalidate()
     );
 
 } else {
