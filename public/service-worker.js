@@ -1,6 +1,11 @@
 if (workbox) {
     console.log('Yay! Workbox is loaded 🎉');
 
+    workbox.routing.registerRoute(
+        /^https:\/\/songbookclient-dev.herokuapp.com\/.*$/,
+        workbox.strategies.cacheFirst()
+    );
+
     // cache static assets
     workbox.routing.registerRoute(
         /\.(?:js|css|html)$/,
