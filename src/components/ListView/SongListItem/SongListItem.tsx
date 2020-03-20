@@ -19,7 +19,7 @@ const styles = {
 };
 
 interface Song {
-    id: String,
+    _id: String,
     title: string,
     artist: string,
     album: string,
@@ -37,7 +37,7 @@ interface ISongListItemProps {
 
 const SongListItem = (props: ISongListItemProps) => {
     const { classes, song, setCurrentSong } = props;
-    const { title, artist, album, tags, hasChords, lyrics, chords } = song;
+    const { _id, title, artist, album, tags, hasChords, lyrics, chords } = song;
 
     const renderSubTitle = () => {
         if (artist && artist !== "" && album && album !== "") return artist + " • " + album;
@@ -46,12 +46,12 @@ const SongListItem = (props: ISongListItemProps) => {
         return "";
     }
 
-    const handleSongClick = () => setCurrentSong(title, artist, album, hasChords, lyrics, chords);
+    const handleSongClick = () => setCurrentSong(song);
 
     return (
         <Fragment>
             <Divider />
-            <Link to={`/song/${song.id}`} className={classes.link}>
+            <Link to={`/song/${song._id}`} className={classes.link}>
                 <ListItem button onClick={handleSongClick}>
                     <ListItemText primary={title} secondary={renderSubTitle()} />
                     {hasChords && (                

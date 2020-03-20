@@ -22,38 +22,20 @@ export default function(state = initialState, action: any) {
                 ...state,
                 songList: [
                     ...state.songList,
-                    {
-                        id: action.payload.id,
-                        title: action.payload.title,
-                        artist: action.payload.artist,
-                        album: action.payload.album,
-                        tags: action.payload.tags,
-                        lyrics: action.payload.lyrics,
-                        chords: action.payload.chords,
-                        hasChords: action.payload.hasChords
-                    }
+                    { ...action.payload }
                 ]
             };
         case DELETE_SONG:
             return {
                 ...state,
-                songList: state.songList.filter((song: any) => song.id !== action.payload.id)
+                songList: state.songList.filter((song: any) => song._id !== action.payload.id)
             }
         case EDIT_SONG:
             return {
                 ...state,
                 songList: [
-                    ...state.songList.filter((song: any) => song.id !== action.payload.id),
-                    {
-                        id: action.payload.id,
-                        title: action.payload.title,
-                        artist: action.payload.artist,
-                        album: action.payload.album,
-                        tags: action.payload.tags,
-                        lyrics: action.payload.lyrics,
-                        chords: action.payload.chords,
-                        hasChords: action.payload.hasChords
-                    }
+                    ...state.songList.filter((song: any) => song._id !== action.payload._id),
+                    action.payload
                 ]
             }
         default:

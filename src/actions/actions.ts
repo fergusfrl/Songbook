@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getAllSongsQuery, getSingleSongQuery, addSongMutation, deleteSongMutation, editSongMutation } from './queries';
 import { 
     GET_ALL_SONGS, 
     GET_SINGLE_SONG, 
@@ -24,48 +23,23 @@ const server: any = process.env.REACT_APP_SERVER_LOCATION;
 
 export const getAllSongs = () => (dispatch: any) => {
     dispatch({ type: LOADING_ALL_SONGS });
-    axios({
-        url: server,
-        method: 'post',
-        data: getAllSongsQuery
-    }).then(res => {
-        dispatch({
-            type: GET_ALL_SONGS,
-            payload: res.data.data.songs
-        });
-    }).catch(err => {
-        console.log(err)
-    });
+    makeRequest(
+        { url: server, method: 'get', data: {} },
+        GET_ALL_SONGS,
+        dispatch
+    );
 };
 
 export const addNewSong = (song: any) => (dispatch: any) => {
     dispatch({ type: CREATING_SONG });
-    axios({
-        url: server,
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        data: {
-            ...addSongMutation,
-            variables: {
-                input: { 
-                    title: song.title,
-                    artist: song.artist,
-                    album: song.album,
-                    tags: song.tags,
-                    lyrics: song.lyrics,
-                    chords: song.chords,
-                    hasChords: calculateHasChords(song.chords)
-                }
-            }
-        }
-    })
-        .then(res => 
-            dispatch({
-                type: ADDED_NEW_SONG,
-                payload: res.data.data.addNewSong
-            })
-        )
-        .catch(err => console.log(err));
+    makeRequest(
+        { url: server, method: 'post', data: {
+            ...song,
+            hasChords: calculateHasChords(song.chords)
+        } },
+        ADDED_NEW_SONG,
+        dispatch
+    );
 }
 
 export const setSortOrder = (sortOrder: string) => (dispatch: any) => {
@@ -91,21 +65,11 @@ export const setView = (view: string) => (dispatch: any) => {
 
 export const getSingleSong = (id: string) => (dispatch: any) => {
     dispatch({ type: LOADING_SINGLE_SONG })
-    axios({
-        url: server,
-        method: 'post',
-        data: {
-            ...getSingleSongQuery,
-            variables: { id: id }
-        }
-    }).then(res => {
-        dispatch({
-            type: GET_SINGLE_SONG,
-            payload: res.data.data.song
-        });
-    }).catch(err => {
-        console.log(err);
-    });
+    makeRequest(
+        { url: `${server}/${id}`, method: 'get', data: {} },
+        GET_SINGLE_SONG,
+        dispatch
+    );
 };
 
 export const removeCurrentSong = () => (dispatch: any) => {
@@ -137,61 +101,32 @@ export const closeSnackbar = () => (dispatch: any) => {
     dispatch({ type: CLOSE_SNACKBAR });
 };
 
-export const setCurrentSong = (title: string, artist: string, album:string, hasChords: boolean) => 
+export const setCurrentSong = (song: any) => 
     (dispatch: any) => {
         dispatch({
             type: SET_CURRENT_SONG,
-            payload: { title, artist, album, hasChords }
+            payload: song
         });
     }
 
 export const deleteSong = (id: string) => (dispatch: any) => {
-    axios({
-        url: server,
-        method: 'post',
-        data: {
-            ...deleteSongMutation,
-            variables: {
-                id: id
-            }
-        }
-    }).then(res => {
-        dispatch({
-            type: DELETE_SONG,
-            payload: res.data.data.deleteSong
-        });
-    }).catch(err => {
-        console.log(err);
-    });
+    makeRequest(
+        { url: `${server}/${id}`, method: 'delete', data: {} },
+        DELETE_SONG,
+        dispatch
+    );
 };
 
 export const editSong = (id: string, song: any) => (dispatch: any) => {
-    axios({
-        url: server,
-        method: 'post',
-        data: {
-            ...editSongMutation,
-            variables: {
-                id: id,
-                input: {
-                    title: song.title,
-                    artist: song.artist,
-                    album: song.album,
-                    tags: song.tags,
-                    lyrics: song.lyrics,
-                    chords: song.chords,
-                    hasChords: calculateHasChords(song.chords)
-                }
-            }
-        }
-    }).then(res => {
-        dispatch({
-            type: EDIT_SONG,
-            payload: res.data.data.editSong
-        });
-    }).catch(err => {
-        console.log(err);
-    });
+    makeRequest(
+        { url: `${server}/${id}`, method: 'put', data: {
+            id,
+            ...song,
+            hasChords: calculateHasChords(song.chords)
+        } },
+        EDIT_SONG,
+        dispatch
+    );
 }
 
 const calculateHasChords = (chords: any) => {
@@ -199,4 +134,21 @@ const calculateHasChords = (chords: any) => {
     if (chords === undefined) return false;
     if (chords === "") return false;
     return true;
+}
+
+const makeRequest = (config: any, type: string, dispatch: any) => {
+    axios({
+        url: config.url,
+        method: config.method,
+        data: config.data
+    })
+    .then(res => {
+        dispatch({
+            type: type,
+            payload: res.data
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }

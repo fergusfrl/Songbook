@@ -76,7 +76,7 @@ const AddView = (props: IAddViewProps) => {
 
     const handleSave = () => {
         if (Object.keys(currentSong).length > 0) {
-            editSong(currentSong.id, state);
+            editSong(currentSong._id, state);
             displaySnackbar("Song successfully updated");
         } else {
             addNewSong(state);
@@ -122,6 +122,7 @@ const AddView = (props: IAddViewProps) => {
                             {
                                 input.id !== 'tags' ?
                                     <TextField
+                                        key={index}
                                         value={state[input.id]}
                                         id={input.id}
                                         required={input.required}
@@ -135,6 +136,7 @@ const AddView = (props: IAddViewProps) => {
                                         onChange={handleChange}
                                     /> :
                                     <ChipInput
+                                        key={index}
                                         value={state.tags ? state.tags : []}
                                         onAdd={handleTagAdd}
                                         onDelete={handleTagRemove}
