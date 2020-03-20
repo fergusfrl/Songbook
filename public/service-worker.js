@@ -1,5 +1,15 @@
 if (workbox) {
     console.log('Yay! Workbox is loaded 🎉');
+    
+    workbox.routing.registerRoute(
+        /^https:\/\/storage.googleapis.com\/workbox-cdn\/releases\/3.6.3\/workbox-sw.js/,
+        workbox.strategies.cacheFirst()
+    );
+
+    workbox.routing.registerRoute(
+        /^\/precache-manifest.*$/,
+        workbox.strategies.cacheFirst()
+    );
 
     workbox.routing.registerRoute(
         /^https:\/\/songbookclient-dev.herokuapp.com\/.*$/,
