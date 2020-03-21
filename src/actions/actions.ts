@@ -19,7 +19,7 @@ import {
     SET_CURRENT_SONG
 } from './types';
 
-const server: any = process.env.REACT_APP_SERVER_LOCATION;
+const server: string | undefined = process.env.REACT_APP_SERVER_LOCATION;
 
 export const getAllSongs = () => (dispatch: any) => {
     dispatch({ type: LOADING_ALL_SONGS });

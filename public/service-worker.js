@@ -12,7 +12,7 @@ if (workbox) {
     );
 
     workbox.routing.registerRoute(
-        /^https:\/\/songbookclient-dev.herokuapp.com\/.*$/,
+        /^https:\/\/songbookclient.herokuapp.com\/.*$/,
         workbox.strategies.cacheFirst()
     );
 
