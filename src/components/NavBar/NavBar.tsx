@@ -54,7 +54,7 @@ const NavBar = (props: navBarProps) => {
             <div className={classes.grow}>
                 <AppBar position="fixed" className={classes.appbar}>
                     <Toolbar>
-                        {listView ?
+                        {/* {listView ?
                             <IconButton color="inherit" onClick={toggleDrawer}>
                                 <MenuIcon />
                             </IconButton>  :
@@ -63,7 +63,7 @@ const NavBar = (props: navBarProps) => {
                                     <CloseIcon />
                                 </IconButton>
                             </Link>
-                        }
+                        } */}
                         <Typography variant="h5" color="inherit" className={classes.header}>
                             {renderTitle()}
                         </Typography>

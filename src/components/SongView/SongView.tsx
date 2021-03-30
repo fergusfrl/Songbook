@@ -93,11 +93,14 @@ const SongView = (props: ISongViewProps) => {
         handleModalOpen();
     }
 
-    const renderTypography = (content: string) => (
-        <Typography variant="body1" align="center" style={{ fontSize, whiteSpace: 'pre-line' }}>
-            { content }
-        </Typography>
-    );
+    const renderTypography = (content: string) => {
+        const splitContent = content && content.split('\\n').map((str, index) => <p key={index}>{str}</p>);
+        return (
+            <Typography variant="body1" align="center" style={{ fontSize }}>
+                { splitContent }
+            </Typography>
+        );
+    };
 
     const renderContent = () => hasChords ?
         <SwipeableViews index={tab} onChangeIndex={handleSwipe}>
@@ -131,9 +134,9 @@ const SongView = (props: ISongViewProps) => {
                                 </Grid>
                             </Grid>
                         </div>
-                        <IconButton className={classes.icon} onClick={handleMenuOpen}>
+                        {/* <IconButton className={classes.icon} onClick={handleMenuOpen}>
                             <MoreVertIcon />
-                        </IconButton>
+                        </IconButton> */}
                     </Toolbar>
                     {
                         hasChords &&
